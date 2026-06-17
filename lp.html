@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEWIBE｜動画制作の受託・量産パートナー — 安く・早く・大量に。</title>
+<meta name="description" content="企画から編集まで一括受託。AIをプロの制作工程に組み込み、動画を安く・早く・大量に。代理店・制作会社さま向けのホワイトラベル量産パートナー、株式会社BEWIBE。">
+<meta property="og:title" content="BEWIBE｜動画制作の受託・量産パートナー">
+<meta property="og:description" content="AI×プロ編集で、動画を安く・早く・大量に。代理店・制作会社さまの裏側で動く制作リソース。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<script src="logos-data.js" defer></script>
+<script src="works-data.js" defer></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#b3c34a;--green-deep:#9aac3a;--green-soft:#c7d36e;--green-dk:#788a28;
+  --mint:#eef2e6;--mint-deep:#e3ecd6;
+  --ink:#0d0d0d;--ink-soft:#2a2a22;
+  --paper:#ffffff;
+  --pink:#f2718e;--blue:#2f7fd6;
+  --line:#d7ddc8;--muted:#7c8466;
+  --maxw:1240px;
+  --r:18px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--ink);background:var(--paper);line-height:1.85;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.en{font-family:'Archivo','Noto Sans JP',sans-serif;font-weight:900;letter-spacing:-.02em}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px}
+section{position:relative}
+
+/* eyebrow / section index */
+.eyebrow{font-family:'Archivo';font-weight:800;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-deep);display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:30px;height:2px;background:var(--green-deep);display:inline-block}
+.bg-ink .eyebrow,.bg-green .eyebrow{color:inherit}
+.bg-ink .eyebrow{color:var(--green-soft)}
+.bg-ink .eyebrow::before{background:var(--green-soft)}
+.bg-green .eyebrow::before{background:var(--ink)}
+
+h2.title{font-size:clamp(30px,5vw,54px);font-weight:900;line-height:1.18;letter-spacing:-.02em;margin:22px 0 0}
+.lead{font-size:clamp(16px,2.1vw,19px);line-height:1.95;color:var(--ink-soft);max-width:640px;margin-top:18px}
+.bg-ink .lead{color:#cfd2c6}
+
+/* marker highlight */
+.mk,.mk-pink{padding:0 .05em;-webkit-box-decoration-break:clone;box-decoration-break:clone;background-repeat:no-repeat;background-position:0 78%;background-size:100% .42em}
+.mk{background-image:linear-gradient(var(--green),var(--green))}
+.mk-pink{background-image:linear-gradient(var(--pink),var(--pink))}
+.und{box-shadow:inset 0 -10px 0 var(--green-soft)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:900;font-size:16px;border-radius:100px;padding:15px 30px;transition:transform .18s ease,background .18s ease,color .18s;cursor:pointer;border:2px solid transparent;font-family:inherit}
+.btn .ar{transition:transform .18s ease}
+.btn:hover .ar{transform:translateX(4px)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{transform:translateY(-2px)}
+.btn-green{background:var(--green);color:var(--ink)}
+.btn-green:hover{transform:translateY(-2px);background:var(--green-soft)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+.bg-ink .btn-ghost{color:#fff;border-color:rgba(255,255,255,.5)}
+.bg-ink .btn-ghost:hover{background:#fff;color:var(--ink);border-color:#fff}
+
+/* ===== HEADER ===== */
+header{position:fixed;top:0;left:0;right:0;z-index:200;transition:all .25s ease}
+header .bar{display:flex;align-items:center;justify-content:space-between;height:74px}
+header.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.brand{display:flex;align-items:baseline;gap:9px;font-family:'Archivo';font-weight:900;font-size:23px;letter-spacing:-.01em;color:var(--ink)}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--green-deep);display:inline-block;transform:translateY(-1px)}
+.nav{display:flex;align-items:center;gap:30px}
+.nav a.lnk{font-size:14px;font-weight:700;color:var(--ink-soft);transition:color .15s}
+.nav a.lnk:hover{color:var(--green-deep)}
+.nav .btn{padding:11px 22px;font-size:14px}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+.burger span{width:24px;height:2px;background:var(--ink);display:block;transition:.2s}
+
+/* ===== HERO ===== */
+.hero{background:var(--ink);color:#fff;padding:148px 0 0;overflow:hidden;position:relative}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(120% 80% at 88% -10%, rgba(179,195,74,.30), transparent 55%),
+  radial-gradient(90% 90% at -10% 110%, rgba(47,127,214,.20), transparent 55%);pointer-events:none}
+.hero .wrap{position:relative;z-index:2}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:end}
+.hero-corp{font-family:'Archivo';font-weight:700;font-size:14px;letter-spacing:.2em;color:var(--green-soft);text-transform:uppercase}
+.hero h1{font-size:clamp(42px,7.4vw,90px);font-weight:900;line-height:1.02;letter-spacing:-.035em;margin:22px 0 0}
+.hero h1 .jp{display:block;font-size:clamp(28px,4.6vw,52px);margin-top:14px;letter-spacing:-.02em}
+.hero .sub{font-size:clamp(16px,2vw,19px);color:#c7cbbb;margin-top:26px;max-width:540px;line-height:1.9}
+.hero .cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.hero-aside{padding-bottom:6px}
+.statgrid{display:grid;gap:16px}
+.stat{border-top:2px solid rgba(255,255,255,.18);padding-top:14px}
+.stat b{font-family:'Archivo','Noto Sans JP',sans-serif;font-weight:900;font-size:clamp(34px,5vw,46px);color:var(--green-soft);line-height:1;letter-spacing:-.02em}
+.stat span{display:block;font-size:13.5px;color:#a9ae9a;margin-top:8px;font-weight:700}
+.hero-foot{margin-top:64px;border-top:1px solid rgba(255,255,255,.12);padding:22px 0 26px;display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.hero-foot .lbl{font-size:12px;letter-spacing:.16em;color:#8f9582;font-weight:800;text-transform:uppercase;font-family:'Archivo'}
+.hero-foot .clients{display:flex;gap:26px;flex-wrap:wrap;font-family:'Archivo';font-weight:800;font-size:clamp(15px,2.2vw,20px);color:#e9ecdd;letter-spacing:.01em;opacity:.9}
+.hero-foot .clients span{position:relative}
+
+/* ===== SECTION SPACING ===== */
+.sec{padding:108px 0}
+.sec-head{max-width:760px;margin-bottom:54px}
+.bg-mint{background:var(--mint)}
+.bg-ink{background:var(--ink);color:#fff}
+.bg-green{background:
+  radial-gradient(120% 110% at 90% -10%, rgba(255,255,255,.5), transparent 46%),
+  linear-gradient(160deg,#c7d36e 0%, #b3c34a 45%, #94a634 100%)}
+
+/* ===== SERVICES ===== */
+.svc{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.scard{background:#141414;color:#fff;border-radius:var(--r);padding:38px 36px;position:relative;overflow:hidden;border:1px solid #232318;transition:transform .25s ease,border-color .25s}
+.scard:hover{transform:translateY(-4px);border-color:var(--green-deep)}
+.scard .no{position:absolute;top:26px;right:30px;font-family:'Archivo';font-weight:900;font-size:15px;color:#3b3d2f}
+.scard .et{font-family:'Archivo';font-weight:800;font-size:12px;letter-spacing:.16em;color:var(--green-soft);text-transform:uppercase}
+.scard h3{font-size:26px;font-weight:900;margin:14px 0 12px;line-height:1.3}
+.scard p{font-size:15px;color:#c2c6b6;line-height:1.85}
+
+/* ===== REASONS ===== */
+.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+.reason{padding-top:24px;border-top:3px solid var(--ink)}
+.reason .rn{font-family:'Archivo';font-weight:900;font-size:15px;color:var(--green-deep)}
+.reason h4{font-size:23px;font-weight:900;margin:12px 0 12px;line-height:1.35}
+.reason p{font-size:15.5px;color:var(--ink-soft);line-height:1.9}
+.reason p b{color:var(--green-dk)}
+
+/* ===== WORKS ===== */
+.works-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:44px}
+.wgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.wtile{position:relative;border-radius:var(--r);overflow:hidden;background:#111;aspect-ratio:16/10}
+.wtile.tall{grid-row:span 2;aspect-ratio:auto}
+.wtile .ph{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s ease}
+.wtile:hover .ph{transform:scale(1.04)}
+.wtile .cap{position:absolute;left:0;right:0;bottom:0;padding:46px 22px 18px;background:linear-gradient(transparent,rgba(0,0,0,.82));color:#fff;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.wtile .cap .t{font-weight:900;font-size:16px}
+.wtile .cap .tag{font-family:'Archivo';font-weight:800;font-size:11px;letter-spacing:.12em;color:var(--green-soft);text-transform:uppercase}
+/* video facade */
+.ytembed{cursor:pointer;background:#000 center/cover no-repeat}
+.ytembed .ytplay{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:rgba(13,13,13,.7);display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:3}
+.ytembed .ytplay::after{content:"";border-style:solid;border-width:15px 0 15px 25px;border-color:transparent transparent transparent #fff;margin-left:6px}
+.ytembed:hover .ytplay{background:#ff3b3b;transform:translate(-50%,-50%) scale(1.08)}
+.ytembed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:4}
+
+/* ===== TOOLS ===== */
+.toolwrap{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:8px}
+.toolcol .tch{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.toolcol .tch .pill{background:var(--ink);color:#fff;font-weight:900;font-size:15px;border-radius:100px;padding:8px 20px}
+.toolcol .tch .pill.g{background:var(--green-deep);color:var(--ink)}
+.toolcol .tch .s{font-size:13.5px;color:var(--muted);font-weight:700}
+.tools{display:flex;flex-wrap:wrap;gap:12px}
+.tool{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:11px;min-width:0}
+.bg-mint .tool{background:#fff}
+.tool img{height:30px;width:auto}
+.tool .wm{font-family:'Archivo';font-weight:900;font-size:18px}
+.tool .nm{font-size:14px;font-weight:800;color:var(--ink-soft)}
+
+/* ===== PRICING ===== */
+.ptable{border:2px solid var(--ink);border-radius:var(--r);overflow:hidden;background:#fff}
+.prow{display:grid;grid-template-columns:1.1fr .9fr 1.6fr;border-bottom:1px solid var(--line)}
+.prow:last-child{border-bottom:none}
+.prow.h{background:var(--ink);color:#fff}
+.prow.h .pc{font-family:'Archivo';font-weight:800;font-size:12px;letter-spacing:.14em;color:var(--green-soft);text-transform:uppercase;padding:16px 26px}
+.pc{padding:26px}
+.pc.b1{border-right:1px solid var(--line)}
+.pc.b2{border-right:1px solid var(--line)}
+.prow.h .pc{border-color:#333}
+.p-plan{font-size:20px;font-weight:900;line-height:1.3}
+.p-plan small{display:block;font-size:13px;color:var(--muted);font-weight:700;margin-top:4px}
+.p-price{font-family:'Archivo','Noto Sans JP',sans-serif;font-weight:900;font-size:34px;line-height:1;letter-spacing:-.02em}
+.p-price small{font-size:14px;color:var(--muted);font-weight:700;font-family:'Noto Sans JP'}
+.p-price .lot{display:block;font-family:'Noto Sans JP';font-size:13px;color:var(--blue);font-weight:900;margin-top:7px}
+.p-desc{font-size:14.5px;color:var(--ink-soft);line-height:1.85}
+.p-desc b{color:var(--ink)}
+.pnote{margin-top:16px;font-size:13px;color:var(--muted);font-weight:600}
+
+/* ===== MODES ===== */
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.mode{background:rgba(13,13,13,.04);border:2px solid var(--ink);border-radius:var(--r);padding:38px 36px;display:flex;flex-direction:column}
+.bg-green .mode{background:rgba(255,255,255,.55);border-color:var(--ink)}
+.mode .mh{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.mode .mno{width:48px;height:48px;border-radius:50%;background:var(--ink);color:var(--green);font-family:'Archivo';font-weight:900;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mode h4{font-size:25px;font-weight:900}
+.mode .mtag{font-family:'Archivo';font-weight:800;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.mode>p{font-size:15.5px;color:var(--ink-soft);line-height:1.85}
+.mode .sl{font-size:12px;font-weight:900;letter-spacing:.1em;color:var(--muted);margin:20px 0 8px;text-transform:uppercase}
+.mode ul{list-style:none}
+.mode li{font-size:14.5px;color:var(--ink-soft);padding:4px 0;display:flex;gap:10px}
+.mode li::before{content:"↘";color:var(--green-dk);font-weight:900}
+.mode .who{margin-top:16px;background:rgba(13,13,13,.05);border-radius:12px;padding:14px 18px;font-size:13.5px;line-height:1.75;color:var(--ink-soft)}
+.bg-green .mode .who{background:rgba(13,13,13,.06)}
+.mode .who b{color:var(--ink)}
+.mode .tag-price{margin-top:auto;padding-top:18px;font-size:14.5px;font-weight:900;color:var(--blue)}
+
+/* ===== AGENCY ===== */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.wc{background:#161616;border-radius:var(--r);padding:30px 30px;border-top:3px solid var(--green-deep)}
+.wc .wn{font-family:'Archivo';font-weight:900;font-size:14px;color:var(--green-soft);letter-spacing:.04em}
+.wc h4{font-size:19px;font-weight:900;margin:12px 0 10px;line-height:1.4}
+.wc p{font-size:14px;color:#c2c6b6;line-height:1.85}
+
+/* ===== FLOW ===== */
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+.flow .st{background:#fff;border:2px solid var(--ink);border-radius:100px;padding:13px 26px;font-weight:900;font-size:15px}
+.flow .sp{color:var(--green-dk);font-weight:900;font-size:18px}
+.bighit{font-size:clamp(34px,6vw,68px);font-weight:900;line-height:1.05;letter-spacing:-.03em;margin-top:46px}
+
+/* ===== CTA ===== */
+.cta-sec{text-align:center;padding:120px 0}
+.cta-sec .eyebrow{justify-content:center}
+.cta-sec h2{font-size:clamp(34px,6.4vw,76px);font-weight:900;line-height:1.08;letter-spacing:-.03em;margin:20px 0 0}
+.cta-sec h2 em{font-style:normal;background:var(--ink);color:var(--green);padding:0 .08em}
+.cta-sec p{font-size:clamp(16px,2.2vw,20px);color:var(--ink-soft);margin:22px auto 36px;max-width:560px;font-weight:600}
+.cta-sec .btn{font-size:18px;padding:20px 50px}
+.cta-sec .meta{margin-top:30px;font-size:14px;color:var(--ink-soft);font-weight:700}
+
+/* ===== FOOTER ===== */
+footer{background:var(--ink);color:#fff;padding:70px 0 40px}
+.fgrid{display:grid;grid-template-columns:1fr 1.3fr;gap:50px;align-items:start}
+.fbrand .b{font-family:'Archivo';font-weight:900;font-size:30px;letter-spacing:-.01em}
+.fbrand p{font-size:14px;color:#a9ae9a;margin-top:14px;line-height:1.85;max-width:330px}
+.fbrand .links{display:flex;gap:8px;margin-top:22px;flex-wrap:wrap}
+.fbrand .links a{font-size:13px;font-weight:800;color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:9px 18px;transition:.15s}
+.fbrand .links a:hover{background:#fff;color:var(--ink)}
+.cinfo{display:grid;gap:0}
+.cinfo .row{display:grid;grid-template-columns:130px 1fr;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:14px}
+.cinfo .row .k{color:#8f9582;font-weight:800}
+.cinfo .row .v{color:#e9ecdd;font-weight:600}
+.fbot{margin-top:46px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;color:#8f9582}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr;gap:36px;align-items:start}
+  .hero-aside{padding-bottom:0}
+  .statgrid{grid-template-columns:repeat(3,1fr);gap:12px}
+  .svc,.reasons,.wgrid,.toolwrap,.modes,.why{grid-template-columns:1fr}
+  .reasons{gap:26px}
+  .why{gap:14px}
+  .wtile.tall{grid-row:auto;aspect-ratio:16/10}
+  .prow{grid-template-columns:1fr}
+  .pc.b1,.pc.b2{border-right:none;border-bottom:1px solid var(--line)}
+  .prow.h{display:none}
+  .fgrid{grid-template-columns:1fr;gap:34px}
+  .nav .lnk{display:none}
+  .burger{display:flex}
+  .nav.open .lnk{display:block}
+}
+@media(max-width:920px){
+  .nav{position:relative}
+  .nav.open{position:fixed;top:74px;left:0;right:0;background:#fff;flex-direction:column;align-items:flex-start;gap:0;padding:8px 28px 22px;box-shadow:0 12px 24px rgba(0,0,0,.12);border-top:1px solid var(--line)}
+  .nav.open .lnk{padding:14px 0;width:100%;border-bottom:1px solid var(--line);font-size:16px}
+  .nav.open .btn{margin-top:14px}
+}
+@media(max-width:560px){
+  .sec{padding:78px 0}
+  .hero{padding:120px 0 0}
+  .statgrid{grid-template-columns:1fr;gap:10px}
+  .stat{display:flex;align-items:baseline;gap:14px;border-top:1px solid rgba(255,255,255,.16)}
+  .stat span{margin-top:0}
+  .cta-sec h2{white-space:normal}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="wrap bar">
+    <a href="#top" class="brand">BEWIBE<span class="dot"></span></a>
+    <nav class="nav" id="nav">
+      <a class="lnk" href="#services">サービス</a>
+      <a class="lnk" href="#works">実績</a>
+      <a class="lnk" href="#price">料金</a>
+      <a class="lnk" href="#flow">進め方</a>
+      <a class="btn btn-dark" href="#contact">相談する <span class="ar">→</span></a>
+    </nav>
+    <button class="burger" id="burger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-corp">BEWIBE — AI Video Production</div>
+        <h1 class="en">CHEAP. FAST.<br>AT SCALE.<span class="jp">動画、<span class="mk-pink" style="color:#fff">量産</span>します。</span></h1>
+        <p class="sub">企画・台本から撮影・編集・モーショングラフィックスまで一括受託。生成AIをプロの制作工程に組み込み、<b style="color:#fff">安く・早く・大量に</b>つくる。代理店・制作会社さまの裏側で動く制作リソースです。</p>
+        <div class="cta">
+          <a class="btn btn-green" href="#contact">無料で相談する <span class="ar">→</span></a>
+          <a class="btn btn-ghost" href="#works">実績を見る</a>
+        </div>
+      </div>
+      <aside class="hero-aside">
+        <div class="statgrid">
+          <div class="stat"><b>¥2,000〜</b><span>ショート動画 1本（バルク時）</span></div>
+          <div class="stat"><b>最短数日</b><span>初稿納品まで</span></div>
+          <div class="stat"><b>月100本〜</b><span>量産キャパシティ</span></div>
+        </div>
+      </aside>
+    </div>
+    <div class="hero-foot">
+      <span class="lbl">Trusted by national-scale projects</span>
+      <div class="clients"><span>Warner Music</span><span>Universal Music</span><span>SLY</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec bg-mint" id="services">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">What we do</span>
+      <h2 class="title">動画まわり、<span class="mk">ぜんぶ。</span></h2>
+      <p class="lead">受託でも、貴社への制作ツール導入でも。AIを組み込んだ量産前提のフローで、1本からでも100本でも対応します。</p>
+    </div>
+    <div class="svc">
+      <div class="scard rv"><span class="no">01</span><span class="et">Production</span><h3>受託制作</h3><p>1本から発注OK。企画から編集まで丸投げ可能。貴社・クライアント名義のホワイトラベル納品にも対応します。</p></div>
+      <div class="scard rv"><span class="no">02</span><span class="et">Mass / AI</span><h3>AIで量産</h3><p>生成AIを制作工程に組み込み、量産前提でテンプレ化。だから1本あたりが安く、納期も早い。</p></div>
+      <div class="scard rv"><span class="no">03</span><span class="et">Motion</span><h3>モーショングラフィックス</h3><p>After Effectsを使ったコンセプト動画・アニメMVまで。ハイエンドな表現も一気通貫で。</p></div>
+      <div class="scard rv"><span class="no">04</span><span class="et">Toolkit</span><h3>ツール導入</h3><p>貴社内で量産できるAI制作フローの設計・導入支援。内製化したい制作会社さまへ。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHEAP/FAST -->
+<section class="sec bg-ink">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Why so cheap &amp; fast</span>
+      <h2 class="title">なぜ、<span class="mk-pink">安い・早い・大量</span>が<br>成立するのか。</h2>
+    </div>
+    <div class="reasons">
+      <div class="reason rv"><div class="rn">01</div><h4>AIを生成工程に組み込み</h4><p>素材生成・たたき台・バリエーション出しをAIで高速化。人の手は仕上げとディレクションに集中させます。</p></div>
+      <div class="reason rv"><div class="rn">02</div><h4>量産前提のテンプレ化</h4><p>構成・字幕・フォーマットを標準化。2本目以降は爆速で、バルク発注ほど単価が下がります。</p></div>
+      <div class="reason rv"><div class="rn">03</div><h4>大手案件で鍛えた制作力</h4><p><b>Warner Music・Universal Music・SLY</b> などナショナル級の現場で培った品質。安い＝雑、にはしません。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section class="sec" id="works">
+  <div class="wrap">
+    <div class="works-head rv">
+      <div>
+        <span class="eyebrow">Our works</span>
+        <h2 class="title">つくってきた、<span class="mk">本物の動画たち。</span></h2>
+      </div>
+      <p class="lead" style="margin:0">縦型ショートの量産から、AEモーション・YouTubeシリーズまで。動画はクリックでその場再生できます。</p>
+    </div>
+    <div class="wgrid">
+      <div class="wtile ytembed rv" data-yt="65hm5Z1adq8" data-thumb onclick="playYT(this)">
+        <span class="ytplay"></span>
+        <span class="cap"><span class="t">冒険の学校</span><span class="tag">YouTube Series</span></span>
+      </div>
+      <div class="wtile ytembed rv" data-yt="dA87jvDvpuM" data-thumb onclick="playYT(this)">
+        <span class="ytplay"></span>
+        <span class="cap"><span class="t">TUUN ローンチムービー</span><span class="tag">Concept / Motion</span></span>
+      </div>
+      <div class="wtile rv"><div class="ph" data-work="nosweat"></div><span class="cap"><span class="t">No Sweat</span><span class="tag">Brand Movie</span></span></div>
+      <div class="wtile rv"><div class="ph" data-work="missyou"></div><span class="cap"><span class="t">Miss You</span><span class="tag">Music Video</span></span></div>
+      <div class="wtile rv" style="grid-column:1/-1;aspect-ratio:21/8"><div class="ph" data-work="sly"></div><span class="cap"><span class="t">SLY</span><span class="tag">Fashion / Campaign</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="sec bg-mint">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Our stack</span>
+      <h2 class="title">「人の手のクオリティ」と<br>「AIのスピード」を両立。</h2>
+      <p class="lead">プロ向けの編集環境と最先端の生成AIを掛け合わせ。仕上げは人、量産はAIが担います。</p>
+    </div>
+    <div class="toolwrap">
+      <div class="toolcol rv">
+        <div class="tch"><span class="pill">プロ編集</span><span class="s">Adobe Creative Cloud で仕上げる</span></div>
+        <div class="tools">
+          <div class="tool"><img data-logo="ae" alt=""><span class="nm">After Effects</span></div>
+          <div class="tool"><img data-logo="pr" alt=""><span class="nm">Premiere Pro</span></div>
+          <div class="tool"><img data-logo="ps" alt=""><span class="nm">Photoshop</span></div>
+          <div class="tool"><img data-logo="ai" alt=""><span class="nm">Illustrator</span></div>
+        </div>
+      </div>
+      <div class="toolcol rv">
+        <div class="tch"><span class="pill g">AI生成</span><span class="s">素材生成・量産を高速化する</span></div>
+        <div class="tools">
+          <div class="tool"><img data-logo="openai" alt=""><span class="nm">Sora</span></div>
+          <div class="tool"><span class="wm">Runway</span></div>
+          <div class="tool"><img data-logo="google" alt=""><span class="nm">Google Veo</span></div>
+          <div class="tool"><span class="wm">Midjourney</span></div>
+          <div class="tool"><span class="wm">Kling</span></div>
+          <div class="tool"><img data-logo="eleven" alt=""><span class="nm">ElevenLabs</span></div>
+          <div class="tool"><span class="wm">CapCut</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec" id="price">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Menu &amp; price</span>
+      <h2 class="title">制作メニュー & 料金。</h2>
+      <p class="lead">受託制作／貴社へのツール導入、どちらでも対応可能です。</p>
+    </div>
+    <div class="ptable rv">
+      <div class="prow h"><div class="pc b1">Menu</div><div class="pc b2">Price</div><div class="pc">内容・受注ロット</div></div>
+      <div class="prow">
+        <div class="pc b1"><div class="p-plan">ショート動画<small>縦型 / TikTok・Reels・Shorts</small></div></div>
+        <div class="pc b2"><div class="p-price">¥2,000<small>／本〜</small><span class="lot">バルク30本〜</span></div></div>
+        <div class="pc"><div class="p-desc">AI生成を中心に<b>大量生産</b>。トレンドの縦型ショートを安く・早く・まとめて。広告A/Bバリエーション出しにも最適。</div></div>
+      </div>
+      <div class="prow">
+        <div class="pc b1"><div class="p-plan">YouTube用コンテンツ<small>解説・ストーリー・シリーズ系</small></div></div>
+        <div class="pc b2"><div class="p-price">¥5,000<small>／本〜</small><span class="lot">20本〜</span></div></div>
+        <div class="pc"><div class="p-desc">1〜2分。素材ご支給＋<b>カット指示書ベースの編集中心</b>。シリーズをまとめて量産します。</div></div>
+      </div>
+      <div class="prow">
+        <div class="pc b1"><div class="p-plan">コンセプト動画<small>AE モーショングラフィックス</small></div></div>
+        <div class="pc b2"><div class="p-price" style="font-size:24px">個別見積<span class="lot">1本〜</span></div></div>
+        <div class="pc"><div class="p-desc">After Effects による<b>モーショングラフィックス系アニメーション</b>。ブランドムービー・MV級のハイエンド表現。</div></div>
+      </div>
+    </div>
+    <p class="pnote">※ 外部AIの利用料は実費別途。仕様により金額は変動します。まずはお気軽にご相談ください。</p>
+  </div>
+</section>
+
+<!-- TWO MODES -->
+<section class="sec bg-green">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Two ways</span>
+      <h2 class="title">受託も、内製も。<br>どちらも選べます。</h2>
+      <p class="lead" style="color:#243012">「つくってほしい」も「自分たちでつくれるようにしたい」も。状況に合わせて。併用もOKです。</p>
+    </div>
+    <div class="modes">
+      <div class="mode rv">
+        <div class="mh"><div class="mno">01</div><h4>受託制作</h4></div>
+        <div class="mtag">Outsource — まるごとお任せ</div>
+        <p>企画から納品までBEWIBEが一括対応。貴社・クライアント名義の<b>ホワイトラベル納品</b>に対応します。</p>
+        <div class="sl">含まれるもの</div>
+        <ul><li>企画・構成・台本</li><li>カット指示 / AI生成 / 撮影</li><li>編集・MA・修正対応</li></ul>
+        <div class="who"><b>こんな方に</b>　制作リソースを外に持ちたい／急な大量・短納期案件／手が回らない領域だけ任せたい</div>
+        <div class="tag-price">料金：制作メニューの単価</div>
+      </div>
+      <div class="mode rv">
+        <div class="mh"><div class="mno">02</div><h4>ツール導入</h4></div>
+        <div class="mtag">Toolkit — 内製化を支援</div>
+        <p>AI動画制作のフロー・ツール群を貴社へ導入。<b>社内で量産できる体制</b>づくりまで伴走します。</p>
+        <div class="sl">含まれるもの</div>
+        <ul><li>AIツール選定・ワークフロー設計</li><li>テンプレ・台本フォーマット提供</li><li>オペレーション研修・立ち上げ伴走</li></ul>
+        <div class="who"><b>こんな方に</b>　制作を内製化したい／既存チームの生産量を上げたい／ランニングコストを抑えたい</div>
+        <div class="tag-price">料金：個別見積（規模に応じて）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR AGENCIES -->
+<section class="sec bg-ink">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">For agency &amp; production</span>
+      <h2 class="title">代理店・制作会社の<br><span class="mk-pink">パートナー</span>として。</h2>
+      <p class="lead">表に出ない制作リソースとして。貴社の制作キャパと品質を、そのまま拡張します。</p>
+    </div>
+    <div class="why">
+      <div class="wc rv"><div class="wn">WHITE LABEL / OEM</div><h4>ホワイトラベル納品</h4><p>貴社・クライアント名義での納品OK。表に出ない“制作リソース”として動きます。クレジット要否も柔軟に。</p></div>
+      <div class="wc rv"><div class="wn">SPOT CAPACITY</div><h4>スポットで即増産</h4><p>急な大量案件・短納期にスポット対応。キャパオーバーの波を一緒に吸収。最短数日で初稿。</p></div>
+      <div class="wc rv"><div class="wn">VOLUME PRICE</div><h4>量産価格</h4><p>AI活用でショート1本¥2,000〜。バルクほど安く。予算の厳しい案件でも利益を残せます。</p></div>
+      <div class="wc rv"><div class="wn">END TO END</div><h4>ショート〜AEまで一気通貫</h4><p>縦型ショートの量産から、AEモーション・アニメMVのハイエンドまで。1社で完結します。</p></div>
+      <div class="wc rv"><div class="wn">NDA / SECURITY</div><h4>NDA・機密対応</h4><p>秘密保持契約を締結のうえ制作。ナショナル案件で培った情報管理体制で安心。</p></div>
+      <div class="wc rv"><div class="wn">QUALITY</div><h4>量産でもブランドを守る</h4><p>大手レーベルMV・ナショナル案件の実績どおり、安かろう悪かろうにはしません。ダサいの、嫌いです。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="sec bg-mint" id="flow">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">How it works</span>
+      <h2 class="title">動画は<span class="mk">一本から</span>発注可能。</h2>
+      <p class="lead">スポット1本でも、月間まとめてでも。スピード感そのままに。</p>
+    </div>
+    <div class="flow rv">
+      <span class="st">ヒアリング</span><span class="sp">→</span>
+      <span class="st">構成・カット指示</span><span class="sp">→</span>
+      <span class="st">AI生成・撮影</span><span class="sp">→</span>
+      <span class="st">編集</span><span class="sp">→</span>
+      <span class="st">納品</span>
+    </div>
+    <div class="bighit rv">最短<span class="mk">数日</span>で初稿。</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec cta-sec bg-green" id="contact">
+  <div class="wrap rv">
+    <span class="eyebrow">Let's make videos</span>
+    <h2>動画、<em>量産</em>します。</h2>
+    <p>1本でも、100本でも。受託でも、ツール導入でも。<br>「こんな動画、いくらで・いつまでに?」だけ持ってきてください。</p>
+    <a class="btn btn-dark" href="mailto:contact@bewibe.com?subject=%E5%8B%95%E7%94%BB%E5%88%B6%E4%BD%9C%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%3A%0A%E3%81%94%E7%94%A8%E4%BB%B6%3A%0A%E5%B8%8C%E6%9C%9B%E6%9C%AC%E6%95%B0%E3%83%BB%E7%B4%8D%E6%9C%9F%3A%0A">まずは相談する <span class="ar">→</span></a>
+    <div class="meta">contact@bewibe.com</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <div class="b">BEWIBE<span style="color:var(--green-deep)">.</span></div>
+        <p>動画制作の受託・量産パートナー。AIをプロの制作工程に組み込み、安く・早く・大量に。</p>
+        <div class="links">
+          <a href="service-doc.html">サービス資料（スライド）</a>
+          <a href="mailto:contact@bewibe.com">メールで相談</a>
+        </div>
+      </div>
+      <div class="cinfo">
+        <div class="row"><span class="k">商号</span><span class="v">株式会社BEWIBE / BEWIBE.INC.</span></div>
+        <div class="row"><span class="k">設立</span><span class="v">2021年5月27日</span></div>
+        <div class="row"><span class="k">所在地</span><span class="v">〒162-0831 東京都新宿区横寺町31 一水寮204号</span></div>
+        <div class="row"><span class="k">法人番号</span><span class="v">4011101095189</span></div>
+        <div class="row"><span class="k">お問い合わせ</span><span class="v">contact@bewibe.com</span></div>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 BEWIBE Inc. All rights reserved.</span>
+      <span>AI Video Production — Cheap. Fast. At scale.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// inject embedded assets (logos / works / youtube thumbnails)
+window.addEventListener('DOMContentLoaded',function(){
+  if(window.LOGOS){
+    document.querySelectorAll('img[data-logo]').forEach(function(el){
+      var k=el.getAttribute('data-logo'); if(LOGOS[k])el.src=LOGOS[k];
+    });
+  }
+  if(window.WORKS){
+    document.querySelectorAll('[data-work]').forEach(function(el){
+      var k=el.getAttribute('data-work'); if(WORKS[k])el.style.backgroundImage='url("'+WORKS[k]+'")';
+    });
+  }
+  if(window.YT_THUMBS){
+    document.querySelectorAll('.ytembed[data-thumb]').forEach(function(el){
+      var t=YT_THUMBS[el.getAttribute('data-yt')];
+      if(t)el.style.backgroundImage='url("'+t+'")';
+    });
+  }
+});
+
+// click-to-play youtube (load iframe only on click)
+function playYT(el){
+  var id=el.getAttribute('data-yt');
+  if(!id||el.dataset.playing)return;
+  el.dataset.playing='1';
+  var f=document.createElement('iframe');
+  f.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1';
+  f.title='BEWIBE work';
+  f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
+  f.allowFullscreen=true;
+  el.appendChild(f);
+}
+
+// sticky header state
+var hdr=document.getElementById('hdr');
+function onScroll(){hdr.classList.toggle('scrolled',window.scrollY>20);}
+onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+// mobile nav
+var burger=document.getElementById('burger'),nav=document.getElementById('nav');
+burger.addEventListener('click',function(){nav.classList.toggle('open');});
+nav.addEventListener('click',function(e){if(e.target.classList.contains('lnk'))nav.classList.remove('open');});
+
+// scroll reveal
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+</script>
+</body>
+</html>
