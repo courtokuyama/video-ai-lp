@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEWIBE 動画制作AI受託 — 安く・早く・大量に。</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="logos-data.js"></script>
+<script src="works-data.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#b3c34a;--green-deep:#9aac3a;--green-soft:#c7d36e;
+  --mint:#e3ecd6;--mint-deep:#d6e1c6;
+  --ink:#0d0d0d;--ink-soft:#262626;
+  --paper:#ffffff;
+  --pink:#f2718e;--blue:#2f7fd6;--navy:#1e3a5f;--cyan:#46c6e8;
+  --line:#cdd7bd;--muted:#7c8466;
+  --slide-w:1920px;--slide-h:1080px;
+}
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding-top:0}
+  .slide{page-break-after:always;page-break-inside:avoid;transform:none!important;margin:0!important}
+  .slide:last-child{page-break-after:auto}
+  .viewer-bar{display:none!important}
+}
+html{background:#9aac3a;overflow-x:hidden}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-top:64px}
+.en{font-family:'Archivo','Noto Sans JP',sans-serif;font-weight:900;letter-spacing:-.02em}
+
+/* PDF VIEWER BAR */
+.viewer-bar{position:fixed;top:0;left:0;right:0;z-index:300;height:64px;background:#0d0d0d;display:flex;align-items:center;justify-content:space-between;padding:0 32px;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.viewer-bar-left{display:flex;align-items:center;gap:14px}
+.viewer-bar-icon{width:36px;height:36px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.viewer-bar-icon svg{width:20px;height:20px;fill:#0d0d0d}
+.viewer-bar-title{color:#fff;font-size:16px;font-weight:700}
+.viewer-bar-sub{color:#9aa08c;font-size:13px;margin-left:12px}
+.dl-btn{background:var(--green);color:#0d0d0d;border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:900;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:8px;transition:all .2s}
+.dl-btn:hover{background:var(--green-soft)}
+.dl-btn:disabled{background:#6c7256;color:#fff;cursor:wait}
+.dl-btn svg{width:18px;height:18px;fill:currentColor}
+
+.slide{
+  width:var(--slide-w);height:var(--slide-h);
+  margin:0 auto 40px;background:var(--mint);
+  position:relative;overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:0 8px 40px rgba(0,0,0,.18);transform-origin:top left;
+}
+.bg-green{
+  background-color:var(--green);
+  background-image:
+    radial-gradient(120% 110% at 88% -6%, rgba(255,255,255,.55), rgba(255,255,255,0) 42%),
+    radial-gradient(130% 130% at -8% 112%, rgba(78,96,28,.85), rgba(78,96,28,0) 55%),
+    linear-gradient(152deg, #d4dd7a 0%, #b9c852 40%, #94a634 78%, #788a28 100%);
+}
+.bg-black{
+  color:#fff;
+  background-color:var(--ink);
+  background-image:
+    radial-gradient(120% 100% at 84% -8%, rgba(150,176,66,.45), rgba(13,13,13,0) 50%),
+    radial-gradient(130% 130% at -6% 114%, rgba(40,58,95,.55), rgba(13,13,13,0) 52%),
+    linear-gradient(155deg, #20240f 0%, #131309 45%, #0a0b06 100%);
+}
+.bg-mint{
+  background-color:var(--mint);
+  background-image:
+    radial-gradient(120% 110% at 90% -8%, #ffffff, rgba(255,255,255,0) 46%),
+    radial-gradient(130% 130% at -8% 114%, rgba(150,170,70,.55), rgba(150,170,70,0) 56%),
+    linear-gradient(155deg, #f3f7ec 0%, #e3ecd6 46%, #c6d6ad 100%);
+}
+.work-slide{background:#b3c34a}
+
+.pad{padding:96px 120px;position:relative;z-index:2;flex:1;display:flex;flex-direction:column}
+.pad-c{justify-content:center}
+
+/* shared type */
+.kicker{font-size:22px;font-weight:900;letter-spacing:.04em;margin-bottom:18px}
+.h-xl{font-size:104px;font-weight:900;line-height:1.04;letter-spacing:-.03em}
+.h-lg{font-size:78px;font-weight:900;line-height:1.14;letter-spacing:-.02em}
+.h-md{font-size:60px;font-weight:900;line-height:1.18;letter-spacing:-.01em}
+.lead{font-size:26px;line-height:1.8;color:var(--ink-soft);max-width:1180px}
+.bg-black .lead{color:#cfd2c6}
+
+/* marker highlight — tight band hugging the glyphs */
+.mk,.mk-pink,.mk-blue{
+  padding:0 .04em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background-repeat:no-repeat;background-position:0 56%;background-size:100% .82em;
+}
+.mk{background-image:linear-gradient(var(--green),var(--green))}
+.mk-pink{background-image:linear-gradient(var(--pink),var(--pink));color:#0d0d0d}
+.mk-blue{background-image:linear-gradient(var(--blue),var(--blue));color:#fff}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;background:var(--ink);color:#fff;font-weight:900;border-radius:100px;padding:14px 36px;font-size:30px;line-height:1.2}
+.bg-black .pill{background:#fff;color:#0d0d0d}
+.pill-green{background:var(--green);color:#0d0d0d}
+
+/* footer */
+.foot{position:absolute;bottom:0;left:0;right:0;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 60px;font-size:15px;color:var(--ink);z-index:5;font-weight:700}
+.bg-black .foot{color:#fff}
+.foot .lt{font-weight:900;letter-spacing:.06em}
+
+/* COVER */
+.cover .blob{position:absolute;inset:0;z-index:0;opacity:.5;background:radial-gradient(120% 90% at 75% 30%,rgba(255,255,255,.55),transparent 55%)}
+.cover-corp{font-size:26px;font-weight:800;letter-spacing:.08em;margin-bottom:28px}
+.cover h1{font-size:172px;font-weight:900;line-height:.96;letter-spacing:-.04em;font-family:'Archivo','Noto Sans JP',sans-serif}
+.cover .jp{font-size:46px;font-weight:900;margin-top:26px;letter-spacing:-.01em}
+.cover .cv-pill{display:inline-flex;align-items:center;gap:14px;border:2px solid #0d0d0d;border-radius:100px;padding:14px 34px;font-size:24px;font-weight:900;margin-top:40px;letter-spacing:.04em}
+.cover .cv-meta{position:absolute;bottom:64px;left:120px;font-size:20px;font-weight:700;color:#3a3a2a}
+
+/* CARDS (black) */
+.cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:48px}
+.bcard{background:var(--ink);color:#fff;border-radius:22px;padding:38px 32px;position:relative;min-height:380px;display:flex;flex-direction:column}
+.bcard .cnr{position:absolute;top:30px;right:34px;font-size:26px;color:var(--green)}
+.bcard .en-t{font-size:24px;color:var(--green);font-weight:900;letter-spacing:0;margin-bottom:10px}
+.bcard h4{font-size:34px;font-weight:900;line-height:1.25;margin-bottom:18px}
+.bcard p{font-size:19px;line-height:1.8;color:#d2d5c8}
+
+/* WHY (black) — reasons + numbers */
+.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;margin-top:50px}
+.reason{border-left:3px solid var(--green);padding-left:28px}
+.reason .rn{font-size:22px;font-weight:900;color:var(--green);margin-bottom:14px;font-family:'Archivo'}
+.reason h4{font-size:34px;font-weight:900;line-height:1.28;margin-bottom:14px}
+.reason p{font-size:19px;line-height:1.8;color:#cfd2c6}
+.reason p b{color:var(--green-soft)}
+.numband{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px}
+.nb{border-top:3px solid var(--green);padding-top:18px}
+.nb b{font-size:60px;font-weight:900;color:var(--green);line-height:1;letter-spacing:-.02em;font-family:'Archivo','Noto Sans JP',sans-serif}
+.nb span{display:block;font-size:20px;color:#cfd2c6;margin-top:10px;font-weight:700}
+
+/* TOOLS slide */
+.tool-group{margin-top:36px}
+.tg-head{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.tg-head .pill{font-size:24px;padding:10px 28px}
+.tg-head .tg-sub{font-size:19px;color:var(--muted);font-weight:700}
+.tools{display:flex;flex-wrap:wrap;gap:18px}
+.tool{background:var(--ink);border-radius:18px;padding:24px 26px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-width:150px;min-height:128px}
+.tool img{height:52px;width:auto;object-fit:contain}
+.tool .wm{font-family:'Archivo';font-weight:900;font-size:30px;color:#fff;letter-spacing:-.01em}
+.tool .nm{font-size:17px;font-weight:800;color:#e7eadb}
+
+/* PRICE SUMMARY TABLE */
+.ptable{margin-top:36px;border:3px solid var(--ink);border-radius:8px;overflow:hidden}
+.prow{display:grid;grid-template-columns:360px 330px 1fr;border-bottom:3px solid var(--ink)}
+.prow:last-child{border-bottom:none}
+.prow.head{background:var(--ink);color:#fff}
+.pcell{padding:28px 34px;border-right:3px solid var(--ink);display:flex;flex-direction:column;justify-content:center}
+.pcell:last-child{border-right:none}
+.prow.head .pcell{border-right-color:#3a3a3a;font-size:24px;font-weight:900;letter-spacing:.06em;text-align:center;align-items:center}
+.p-plan{font-size:32px;font-weight:900;line-height:1.3}
+.p-plan small{display:block;font-size:18px;color:var(--muted);font-weight:700;margin-top:6px;letter-spacing:0}
+.p-price{font-size:50px;font-weight:900;color:var(--ink);line-height:1.05;font-family:'Archivo','Noto Sans JP',sans-serif}
+.p-price small{font-size:20px;color:var(--muted);font-weight:700}
+.p-price .lot{display:block;font-size:19px;color:var(--blue);font-weight:900;margin-top:8px;font-family:'Noto Sans JP'}
+.p-desc{font-size:19px;line-height:1.7;color:var(--ink-soft)}
+.p-desc b{color:var(--ink)}
+.pnote{margin-top:20px;font-size:17px;color:var(--muted);font-weight:600}
+
+/* DETAIL (screenshot-led menu pages) */
+.detail{display:grid;grid-template-columns:54fr 46fr;flex:1}
+.shotzone{background:#191c12;display:flex;align-items:center;justify-content:center;gap:24px;padding:84px 56px;position:relative}
+.shotzone .zlabel{position:absolute;top:30px;left:42px;color:var(--green);font-weight:900;font-size:19px;letter-spacing:.12em}
+.frame{border:3px dashed rgba(255,255,255,.32);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(255,255,255,.5);gap:12px;background:rgba(255,255,255,.04);text-align:center;padding:14px}
+.frame .fi{font-size:46px;line-height:1}
+.frame .ft{font-size:15px;font-weight:700;line-height:1.5}
+.frame.vert{width:212px;aspect-ratio:9/16}
+.frame.wide{width:86%;aspect-ratio:16/9}
+/* clickable youtube preview */
+.ytembed{position:relative;overflow:hidden;border-style:solid;border-color:rgba(255,255,255,.18);text-decoration:none;background:#000 center/cover no-repeat;cursor:pointer}
+.ytembed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:inherit}
+.ytembed .ytplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:104px;height:104px;border-radius:50%;background:rgba(13,13,13,.74);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.ytembed .ytplay::after{content:"";border-style:solid;border-width:22px 0 22px 36px;border-color:transparent transparent transparent #fff;margin-left:8px}
+.ytembed:hover .ytplay{background:#ff3b3b;transform:translate(-50%,-50%) scale(1.08)}
+.ytembed .ytcap{position:absolute;left:0;right:0;bottom:0;padding:18px 22px;background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff;font-size:16px;font-weight:800;letter-spacing:.02em}
+.spec{padding:70px 78px;display:flex;flex-direction:column;justify-content:center;background:var(--mint)}
+.spec .snum{font-size:22px;font-weight:900;color:var(--green-deep);font-family:'Archivo'}
+.spec h3{font-size:54px;font-weight:900;line-height:1.12;margin:4px 0 18px}
+.usetags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.usetag{background:var(--ink);color:#fff;border-radius:100px;padding:8px 20px;font-size:18px;font-weight:800}
+.specrow{display:flex;align-items:center;gap:20px;padding:15px 0;border-bottom:1px solid var(--line)}
+.specrow .sl{width:120px;font-size:18px;font-weight:800;color:var(--muted);flex-shrink:0}
+.specrow .sv{font-size:27px;font-weight:900;color:var(--ink);line-height:1.2}
+.specrow .sv .yen{font-family:'Archivo'}
+.specrow .sv .sub{font-size:18px;color:var(--muted);font-weight:700}
+.specrow.tools .sv{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.tchip{background:var(--ink);border-radius:10px;height:46px;padding:0 14px;display:flex;align-items:center;gap:8px}
+.tchip img{height:24px}
+.tchip span{color:#fff;font-size:15px;font-weight:800}
+.tchip .wm{font-family:'Archivo';font-weight:900;color:#fff;font-size:17px}
+.specnote{margin-top:20px;font-size:19px;line-height:1.7;color:var(--ink-soft)}
+
+/* TWO MODES */
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:44px}
+.mode{background:#fff;border:3px solid var(--ink);border-radius:22px;padding:42px 44px;display:flex;flex-direction:column}
+.mode .mh{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.mode .mno{width:64px;height:64px;border-radius:50%;background:var(--ink);color:var(--green);font-size:28px;font-weight:900;display:flex;align-items:center;justify-content:center;font-family:'Archivo'}
+.mode h4{font-size:40px;font-weight:900;line-height:1.2}
+.mode .mtag{font-size:19px;color:var(--blue);font-weight:900;margin-bottom:14px}
+.mode p{font-size:21px;line-height:1.85;color:var(--ink-soft)}
+.mode p{font-size:20px}
+.mode .seclabel{font-size:15px;font-weight:900;letter-spacing:.1em;color:var(--muted);margin:20px 0 6px}
+.mode ul{list-style:none}
+.mode li{font-size:19px;color:var(--ink-soft);padding:5px 0;display:flex;gap:12px}
+.mode li::before{content:"\2198";color:var(--green-deep);font-weight:900}
+.mode .whobox{margin-top:18px;background:var(--mint);border-radius:12px;padding:16px 20px;font-size:17px;line-height:1.7;color:var(--ink-soft)}
+.mode .whobox b{color:var(--ink)}
+.mode .pricetag{margin-top:auto;padding-top:18px;font-size:19px;font-weight:900;color:var(--blue)}
+
+/* SECTION DIVIDER */
+.divider{justify-content:center;align-items:center;text-align:center}
+.divider .dv-en{font-size:38px;font-weight:900;letter-spacing:.22em;color:#0d0d0d;margin-bottom:18px;font-family:'Archivo'}
+.divider h2{font-size:200px;font-weight:900;line-height:1;letter-spacing:-.03em}
+.divider .dv-sub{font-size:46px;font-weight:900;margin-top:10px}
+
+/* WORK (full-bleed real screenshot) */
+.work-img{position:absolute;inset:0;background-size:cover;background-position:center;z-index:1}
+
+/* FLOW / FAST */
+.flow{display:flex;flex-wrap:wrap;gap:18px;margin-top:46px;align-items:center}
+.flow .step{background:var(--ink);color:#fff;border-radius:100px;padding:18px 34px;font-size:26px;font-weight:900}
+.flow .sep{font-size:34px;font-weight:900;color:var(--green-deep)}
+.bighit{margin-top:58px;font-size:120px;font-weight:900;line-height:1.02;letter-spacing:-.03em}
+
+/* WHY US (black) */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:38px}
+.wcard{background:#161616;border-radius:18px;padding:30px 30px;border-top:3px solid var(--green)}
+.wcard .em{font-size:38px;margin-bottom:12px;line-height:1}
+.wcard h4{font-size:26px;font-weight:900;margin-bottom:10px;line-height:1.3}
+.wcard p{font-size:17px;line-height:1.75;color:#cfd2c6}
+
+/* COMPANY INFO */
+.cinfo{margin-top:34px;max-width:1080px;margin-left:auto;margin-right:auto}
+.crow{display:grid;grid-template-columns:240px 1fr;padding:24px 0;border-bottom:1px solid var(--line)}
+.crow .ck{font-size:26px;font-weight:800;text-align:right;padding-right:40px;border-right:2px solid var(--ink)}
+.crow .cv{font-size:26px;font-weight:600;padding-left:40px}
+
+/* END */
+.end{display:flex;align-items:center;justify-content:center;text-align:center;padding:96px}
+.end-inner{max-width:1280px;display:flex;flex-direction:column;align-items:center}
+.end .e-en{font-size:34px;font-weight:900;letter-spacing:.2em;color:#0d0d0d;margin-bottom:24px;font-family:'Archivo'}
+.end h2{font-size:118px;font-weight:900;line-height:1.08;letter-spacing:-.03em;margin-bottom:30px;white-space:nowrap}
+.end h2 em{font-style:normal;background:#0d0d0d;color:var(--green);padding:0 .07em}
+.end h2 .pd{margin-right:-.62em}
+.end p{font-size:30px;color:#1f1f12;font-weight:700;margin-bottom:46px;line-height:1.7}
+.end .e-btn{display:inline-block;background:#0d0d0d;color:#fff;padding:26px 80px;border-radius:100px;font-size:30px;font-weight:900;text-decoration:none;transition:transform .2s}
+.end .e-btn:hover{transform:translateY(-3px)}
+.end .e-meta{margin-top:52px;font-size:22px;color:#2a2a1a;font-weight:700;line-height:1.9}
+</style>
+</head>
+<body>
+
+<!-- VIEWER BAR -->
+<div class="viewer-bar">
+  <div class="viewer-bar-left">
+    <div class="viewer-bar-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg></div>
+    <div class="viewer-bar-title">BEWIBE_動画制作AI_サービス資料.pdf</div>
+    <div class="viewer-bar-sub">全18ページ / 株式会社BEWIBE</div>
+  </div>
+  <div class="viewer-bar-right">
+    <button class="dl-btn" id="dlBtn" onclick="downloadPDF()">
+      <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+      <span id="dlText">PDFをダウンロード</span>
+    </button>
+  </div>
+</div>
+
+<!-- 1. COVER -->
+<div class="slide cover bg-green">
+  <div class="blob"></div>
+  <div class="pad pad-c">
+    <div class="cover-corp">株式会社BEWIBE</div>
+    <h1 class="en">AI VIDEO<br>PRODUCTION</h1>
+    <div class="jp">動画制作の受託・量産パートナー</div>
+    <div class="cv-pill">安く・早く・大量に ／ 制作会社・広告代理店さま向け</div>
+  </div>
+  <div class="cv-meta">contact@bewibe.com ／ 2026</div>
+</div>
+
+<!-- 2. WHAT WE DO -->
+<div class="slide bg-mint">
+  <div class="pad pad-c">
+    <div class="h-lg">動画まわり、<span class="mk">ぜんぶ。</span></div>
+    <p class="lead" style="margin-top:20px">企画・台本から撮影・編集・モーショングラフィックスまで一括受託。AIを制作工程に組み込み、<b>安く・早く・大量に</b>つくります。受託でも、貴社への制作ツール導入でも。</p>
+    <div class="cards4">
+      <div class="bcard"><div class="cnr">↘</div><div class="en-t">PRODUCTION</div><h4>受託制作</h4><p>1本から発注OK。企画から編集まで丸投げ可能。貴社・クライアント名義のホワイトラベル納品にも対応します。</p></div>
+      <div class="bcard"><div class="cnr">↘</div><div class="en-t">MASS / AI</div><h4>AIで量産</h4><p>生成AIを制作工程に組み込み、量産前提のテンプレ化。だから1本あたりが安く、納期も早い。</p></div>
+      <div class="bcard"><div class="cnr">↘</div><div class="en-t">MOTION</div><h4>モーション<br>グラフィックス</h4><p>After Effectsを使ったコンセプト動画・アニメMVまで。ハイエンドな表現も一気通貫で。</p></div>
+      <div class="bcard"><div class="cnr">↘</div><div class="en-t">TOOLKIT</div><h4>ツール導入</h4><p>貴社内で量産できるAI制作フローの設計・導入支援。内製化したい制作会社さまへ。</p></div>
+    </div>
+  </div>
+  <div class="foot"><div class="lt">BEWIBE</div><div>02</div></div>
+</div>
+
+<!-- 3. WHY CHEAP / FAST / MASS -->
+<div class="slide bg-black">
+  <div class="pad pad-c">
+    <div class="kicker" style="color:var(--green)">WHY SO CHEAP & FAST</div>
+    <div class="h-lg">なぜ、<span class="mk-blue">安い・早い・大量</span>が<br>成立するのか。</div>
+    <div class="reasons">
+      <div class="reason"><div class="rn">01</div><h4>AIを生成工程に<br>組み込み</h4><p>素材生成・たたき台・バリエーション出しをAIで高速化。人の手は仕上げとディレクションに集中。</p></div>
+      <div class="reason"><div class="rn">02</div><h4>量産前提の<br>テンプレ化</h4><p>構成・字幕・フォーマットを標準化。2本目以降は爆速。バルク発注ほど単価が下がります。</p></div>
+      <div class="reason"><div class="rn">03</div><h4>大手案件で<br>鍛えた制作力</h4><p><b>Warner Music・Universal Music・SLY</b> など、ナショナル級の現場で培った品質。安い＝雑、にはしません。</p></div>
+    </div>
+    <div class="numband">
+      <div class="nb"><b>¥2,000〜</b><span>ショート動画 1本（バルク時）</span></div>
+      <div class="nb"><b>最短数日</b><span>初稿納品まで</span></div>
+      <div class="nb"><b>月100本〜</b><span>量産キャパシティ</span></div>
+    </div>
+  </div>
+  <div class="foot"><div class="lt">BEWIBE</div><div>03</div></div>
+</div>
+
+<!-- 4. TOOLS -->
+<div class="slide bg-mint">
+  <div class="pad pad-c">
+    <div class="h-md">使うツール</div>
+    <p class="lead" style="margin-top:14px">プロ向けの編集環境と、最先端の生成AIを掛け合わせ。「人の手のクオリティ」と「AIのスピード」を両立します。</p>
+    <div class="tool-group">
+      <div class="tg-head"><span class="pill">プロ編集</span><span class="tg-sub">Adobe Creative Cloud で仕上げる</span></div>
+      <div class="tools">
+        <div class="tool"><img data-logo="ae" alt=""><span class="nm">After Effects</span></div>
+        <div class="tool"><img data-logo="pr" alt=""><span class="nm">Premiere Pro</span></div>
+        <div class="tool"><img data-logo="ps" alt=""><span class="nm">Photoshop</span></div>
+        <div class="tool"><img data-logo="ai" alt=""><span class="nm">Illustrator</span></div>
+      </div>
+    </div>
+    <div class="tool-group">
+      <div class="tg-head"><span class="pill pill-green">AI生成</span><span class="tg-sub">素材生成・量産を高速化する</span></div>
+      <div class="tools">
+        <div class="tool"><img data-logo="openai" alt=""><span class="nm">Sora</span></div>
+        <div class="tool"><span class="wm">Runway</span></div>
+        <div class="tool"><img data-logo="google" alt=""><span class="nm">Google Veo</span></div>
+        <div class="tool"><span class="wm">Midjourney</span></div>
+        <div class="tool"><span class="wm">Kling</span></div>
+        <div class="tool"><img data-logo="eleven" alt=""><span class="nm">ElevenLabs</span></div>
+        <div class="tool"><span class="wm">CapCut</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div class="lt">BEWIBE</div><div>04</div></div>
+</div>
+
+<!-- 5. MENU SUMMARY -->
+<div class="slide bg-green">
+  <div class="pad pad-c" style="padding-top:80px">
+    <div class="h-md">制作メニュー & 料金（早見）</div>
+    <div class="ptable">
+      <div class="prow head"><div class="pcell">MENU</div><div class="pcell">PRICE</div><div class="pcell">内容・受注ロット</div></div>
+      <div class="prow" style="background:#fff">
+        <div class="pcell"><div class="p-plan">ショート動画<small>縦型 / TikTok・Reels・Shorts</small></div></div>
+        <div class="pcell"><div class="p-price">¥2,000<small>／本〜</small><span class="lot">バルク30本〜</span></div></div>
+        <div class="pcell"><div class="p-desc">AI生成を中心に<b>大量生産</b>。トレンドに沿った縦型ショートを、安く・早く・まとめて。広告A/Bバリエーション出しにも最適。</div></div>
+      </div>
+      <div class="prow" style="background:#fff">
+        <div class="pcell"><div class="p-plan">YouTube用コンテンツ<small>解説・ストーリー・"冒険"系</small></div></div>
+        <div class="pcell"><div class="p-price">¥5,000<small>／本〜</small><span class="lot">20本〜</span></div></div>
+        <div class="pcell"><div class="p-desc">1〜2分。<b>カット指示あり</b>・モーショングラフィックスは基本なしの編集中心。「冒険の学校」系のシリーズ量産に。</div></div>
+      </div>
+      <div class="prow" style="background:#fff">
+        <div class="pcell"><div class="p-plan">コンセプト動画<small>AE モーショングラフィックス</small></div></div>
+        <div class="pcell"><div class="p-price" style="font-size:38px">個別見積<span class="lot">1本〜</span></div></div>
+        <div class="pcell"><div class="p-desc">After Effects を使った<b>モーショングラフィックス系アニメーション</b>。ブランドムービー・MV級のハイエンド表現。</div></div>
+      </div>
+    </div>
+    <p class="pnote">※ 受託制作／貴社へのツール導入、どちらでも対応可能。外部AIの利用料は実費別途。詳細は次ページから。</p>
+  </div>
+  <div class="foot"><div class="lt">BEWIBE</div><div>05</div></div>
+</div>
+
+<!-- ============ 詳細ページ（制作物スクショがメイン / 後日差し替え） ============ -->
+<!-- 差し替え方法: 各 .shotzone 内の .frame を <img src="スクショ"> に置き換えるか、
+     .frame に style="background:url('...') center/cover" を指定してください。 -->
+
+<!-- 6. DETAIL — SHORT -->
+<div class="slide bg-mint">
+  <div class="detail">
+    <div class="shotzone">
+      <div class="zlabel">▶ 制作物スクショ（差し替え）</div>
+      <div class="frame vert"><span class="fi">▶</span><span class="ft">縦型ショート<br>9:16</span></div>
+      <div class="frame vert"><span class="fi">▶</span><span class="ft">縦型ショート<br>9:16</span></div>
+      <div class="frame vert"><span class="fi">▶</span><span class="ft">縦型ショート<br>9:16</span></div>
+    </div>
+    <div class="spec">
+      <div class="snum">MENU 01</div>
+      <h3>ショート動画</h3>
+      <div class="usetags"><span class="usetag">TikTok</span><span class="usetag">Reels</span><span class="usetag">Shorts</span><span class="usetag">SNS広告 / 認知</span></div>
+      <div class="specrow"><div class="sl">金額</div><div class="sv"><span class="yen">¥2,000</span> <span class="sub">／本〜</span></div></div>
+      <div class="specrow"><div class="sl">受注ロット</div><div class="sv">30本〜 <span class="sub">（バルク発注）</span></div></div>
+      <div class="specrow"><div class="sl">期間</div><div class="sv">最短数日〜 <span class="sub">／ 月100本規模も可</span></div></div>
+      <div class="specrow tools"><div class="sl">使用ツール</div><div class="sv">
+        <span class="tchip"><span class="wm">CapCut</span></span>
+        <span class="tchip"><img data-logo="pr" alt=""><span>Premiere</span></span>
+        <span class="tchip"><img data-logo="openai" alt=""><span>Sora</span></span>
+        <span class="tchip"><span class="wm">Runway</span></span>
+      </div></div>
+      <p class="specnote">AI生成を中心に、トレンドの縦型ショートを安く・大量に。同一企画の<b>A/Bバリエーション量産</b>にも最適です。</p>
+    </div>
+  </div>
+  <div class="foot"><div class="lt">BEWIBE</div><div>06</div></div>
+</div>
+
+<!-- 7. DETAIL — YOUTUBE -->
+<div class="slide bg-mint">
+  <div class="detail">
+    <div class="shotzone">
+      <div class="zlabel">▶ 制作実績（クリックで再生）</div>
+      <div class="frame wide ytembed" data-yt="65hm5Z1adq8" data-thumb onclick="playYT(this)">
+        <span class="ytplay"></span>
+        <span class="ytcap">冒険の学校 ／ YouTube本編シリーズ ▶ クリックで再生</span>
+      </div>
+    </div>
+    <div class="spec">
+      <div class="snum">MENU 02</div>
+      <h3>YouTube用<br>コンテンツ</h3>
+      <div class="usetags"><span class="usetag">YouTube本編</span><span class="usetag">解説・ストーリー</span><span class="usetag">"冒険"系シリーズ</span></div>
+      <div class="specrow"><div class="sl">金額</div><div class="sv"><span class="yen">¥5,000</span> <span class="sub">／本〜</span></div></div>
+      <div class="specrow"><div class="sl">受注ロット</div><div class="sv">20本〜</div></div>
+      <div class="specrow"><div class="sl">尺・仕様</div><div class="sv">1〜2分 <span class="sub">／ カット指示あり</span></div></div>
+      <div class="specrow tools"><div class="sl">使用ツール</div><div class="sv">
+        <span class="tchip"><img data-logo="pr" alt=""><span>Premiere</span></span>
+        <span class="tchip"><img data-logo="ae" alt=""><span>After Effects</span></span>
+        <span class="tchip"><img data-logo="ps" alt=""><span>Photoshop</span></span>
+        <span class="tchip"><span class="wm">CapCut</span></span>
+      </div></div>
+      <p class="specnote">モーショングラフィックス素材・撮影素材はご支給いただき、<b>カット指示書ベースの編集中心</b>でシリーズをまとめて量産します。</p>
+    </div>
+  </div>
+  <div class="foot"><div class="lt">BEWIBE</div><div>07</div></div>
+</div>
+
+<!-- 8. DETAIL — CONCEPT / MOTION GRAPHICS -->
+<div class="slide bg-mint">
+  <div class="detail">
+    <div class="shotzone">
+      <div class="zlabel">▶ 制作実績（クリックで再生）</div>
+      <div class="frame wide ytembed" data-yt="dA87jvDvpuM" data-thumb onclick="playYT(this)">
+        <span class="ytplay"></span>
+        <span class="ytcap">コンセプトムービー / AE モーショングラフィックス ▶ クリックで再生</span>
+      </div>
+    </div>
+    <div class="spec">
+      <div class="snum">MENU 03</div>
+      <h3>コンセプト動画</h3>
+      <div class="usetags"><span class="usetag">ブランドムービー</span><span class="usetag">コンセプトムービー</span><span class="usetag">アニメMV</span></div>
+      <div class="specrow"><div class="sl">金額</div><div class="sv">個別見積</div></div>
+      <div class="specrow"><div class="sl">受注ロット</div><div class="sv">1本〜</div></div>
+      <div class="specrow"><div class="sl">表現</div><div class="sv">AEモーション</div></div>
+      <div class="specrow tools"><div class="sl">使用ツール</div><div class="sv">
+        <span class="tchip"><img data-logo="ae" alt=""><span>After Effects</span></span>
+        <span class="tchip"><img data-logo="ai" alt=""><span>Illustrator</span></span>
+        <span class="tchip"><img data-logo="ps" alt=""><span>Photoshop</span></span>
+      </div></div>
+      <p class="specnote">After Effects を使った<b>モーショングラフィックス系アニメーション</b>。MV・ブランドムービー級のハイエンド表現（次ページからの実績をご覧ください）。</p>
+    </div>
+  </div>
+  <div class="foot"><div class="lt">BEWIBE</div><div>08</div></div>
+</div>
+
+<!-- 9. TWO MODES -->
+<div class="slide bg-green">
+  <div class="pad pad-c" style="padding-top:78px;padding-bottom:78px">
+    <div class="h-md">受託も、内製も。<em style="font-style:normal;background:#0d0d0d;color:var(--green);padding:0 .08em">どちらも選べます。</em></div>
+    <p class="lead" style="margin-top:12px;color:#243012">「つくってほしい」も、「自分たちでつくれるようにしたい」も。貴社の状況に合わせてお選びください。併用もOKです。</p>
+    <div class="modes">
+      <div class="mode">
+        <div class="mh"><div class="mno">01</div><h4>受託制作</h4></div>
+        <div class="mtag">OUTSOURCE — まるごとお任せ</div>
+        <p>企画から納品までBEWIBEが一括対応。貴社・クライアント名義の<b>ホワイトラベル納品</b>に対応します。</p>
+        <div class="seclabel">含まれるもの</div>
+        <ul><li>企画・構成・台本</li><li>カット指示 / AI生成 / 撮影</li><li>編集・MA・修正対応</li></ul>
+        <div class="whobox"><b>こんな方に</b>　制作リソースを外に持ちたい／急な大量・短納期案件／手が回らない領域だけ任せたい</div>
+        <div class="pricetag">料金：制作メニューの単価（p.05〜）</div>
+      </div>
+      <div class="mode">
+        <div class="mh"><div class="mno">02</div><h4>ツール導入</h4></div>
+        <div class="mtag">TOOLKIT — 内製化を支援</div>
+        <p>AI動画制作のフロー・ツール群を貴社へ導入。<b>社内で量産できる体制</b>づくりまで伴走します。</p>
+        <div class="seclabel">含まれるもの</div>
+        <ul><li>AIツール選定・ワークフロー設計</li><li>テンプレ・台本フォーマット提供</li><li>オペレーション研修・立ち上げ伴走</li></ul>
+        <div class="whobox"><b>こんな方に</b>　制作を内製化したい／既存チームの生産量を上げたい／ランニングコストを抑えたい</div>
+        <div class="pricetag">料金：個別見積（規模に応じて）</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div class="lt">BEWIBE</div><div>09</div></div>
+</div>
+
+<!-- 10. WORKS DIVIDER -->
+<div class="slide divider bg-green">
+  <div class="pad pad-c" style="align-items:center">
+    <div class="dv-en">OUR WORKS</div>
+    <h2>実績</h2>
+    <div class="dv-sub">制作してきた、本物の動画たち。</div>
+  </div>
+  <div class="foot"><div class="lt">BEWIBE</div><div>10</div></div>
+</div>
+
+<!-- WORKS (full-bleed real screenshots) -->
+<div class="slide work-slide"><div class="work-img" data-work="nosweat"></div></div>
+<div class="slide work-slide"><div class="work-img" data-work="missyou"></div></div>
+<div class="slide work-slide"><div class="work-img" data-work="sly"></div></div>
+
+<!-- 17. FLOW / FAST -->
+<div class="slide bg-mint">
+  <div class="pad pad-c">
+    <div class="h-md">動画は<span class="mk">一本から</span>発注可能。</div>
+    <p class="lead" style="margin-top:14px">スポット1本でも、月間まとめてでも。スピード感そのままに。</p>
+    <div class="flow">
+      <span class="step">ヒアリング</span><span class="sep">→</span>
+      <span class="step">構成・カット指示</span><span class="sep">→</span>
+      <span class="step">AI生成・撮影</span><span class="sep">→</span>
+      <span class="step">編集</span><span class="sep">→</span>
+      <span class="step">納品</span>
+    </div>
+    <div class="bighit">最短<span class="mk">数日</span>で初稿。</div>
+  </div>
+  <div class="foot"><div class="lt">BEWIBE</div><div>15</div></div>
+</div>
+
+<!-- 18. WHY US (for agencies) -->
+<div class="slide bg-black">
+  <div class="pad pad-c">
+    <div class="kicker" style="color:var(--green)">FOR AGENCY & PRODUCTION</div>
+    <div class="h-md" style="color:#fff">代理店・制作会社の<span class="mk">パートナー</span>として。</div>
+    <p class="lead" style="margin-top:14px">表に出ない制作リソースとして。貴社の制作キャパと品質を、そのまま拡張します。</p>
+    <div class="why">
+      <div class="wcard"><div class="em">🏷️</div><h4>ホワイトラベル / OEM</h4><p>貴社・クライアント名義での納品OK。表に出ない"制作リソース"として動きます。クレジット要否も柔軟に。</p></div>
+      <div class="wcard"><div class="em">⚡</div><h4>スポットで即増産</h4><p>急な大量案件・短納期にスポット対応。キャパオーバーの波を一緒に吸収。最短数日で初稿。</p></div>
+      <div class="wcard"><div class="em">💰</div><h4>量産価格</h4><p>AI活用でショート1本¥2,000〜。バルクほど安く。予算の厳しい案件でも利益を残せます。</p></div>
+      <div class="wcard"><div class="em">🎬</div><h4>ショート〜AEまで一気通貫</h4><p>縦型ショートの量産から、AEモーション・アニメMVのハイエンドまで。1社で完結します。</p></div>
+      <div class="wcard"><div class="em">🔐</div><h4>NDA・機密対応</h4><p>秘密保持契約を締結のうえ制作。ナショナル案件で培った情報管理体制で安心。</p></div>
+      <div class="wcard"><div class="em">🎯</div><h4>量産でもブランドを守る</h4><p>大手レーベルMV・ナショナル案件の実績どおり、安かろう悪かろうにはしません。ダサいの、嫌いです。</p></div>
+    </div>
+  </div>
+  <div class="foot"><div class="lt">BEWIBE</div><div>16</div></div>
+</div>
+
+<!-- 19. COMPANY INFO -->
+<div class="slide bg-mint">
+  <div class="pad pad-c">
+    <div class="h-md" style="text-align:center">会社情報</div>
+    <div class="cinfo">
+      <div class="crow"><div class="ck">商号</div><div class="cv">株式会社BEWIBE / BEWIBE.INC.</div></div>
+      <div class="crow"><div class="ck">設立日</div><div class="cv">2021年5月27日</div></div>
+      <div class="crow"><div class="ck">代表取締役</div><div class="cv">佐々木遼</div></div>
+      <div class="crow"><div class="ck">所在地</div><div class="cv">〒162-0831 東京都新宿区横寺町31 一水寮204号</div></div>
+      <div class="crow"><div class="ck">法人番号</div><div class="cv">4011101095189</div></div>
+    </div>
+  </div>
+  <div class="foot"><div class="lt">BEWIBE</div><div>17</div></div>
+</div>
+
+<!-- 18. END -->
+<div class="slide end bg-green">
+  <div class="end-inner">
+    <div class="e-en">LET'S MAKE VIDEOS</div>
+    <h2>動画、<em>量産</em>します<span class="pd">。</span></h2>
+    <p>1本でも、100本でも。受託でも、ツール導入でも。<br>「こんな動画、いくらで・いつまでに?」だけ持ってきてください。</p>
+    <a class="e-btn" href="mailto:contact@bewibe.com?subject=%E5%8B%95%E7%94%BB%E5%88%B6%E4%BD%9C%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%3A%0A%E3%81%94%E7%94%A8%E4%BB%B6%3A%0A%E5%B8%8C%E6%9C%9B%E6%9C%AC%E6%95%B0%E3%83%BB%E7%B4%8D%E6%9C%9F%3A%0A">まずは相談する →</a>
+    <div class="e-meta">株式会社BEWIBE ／ contact@bewibe.com</div>
+  </div>
+</div>
+
+<script>
+// inject embedded data URIs (logos-data.js / works-data.js)
+(function(){
+  if(window.LOGOS){
+    document.querySelectorAll('img[data-logo]').forEach(function(el){
+      var k=el.getAttribute('data-logo'); if(LOGOS[k])el.src=LOGOS[k];
+    });
+  }
+  if(window.WORKS){
+    document.querySelectorAll('.work-img[data-work]').forEach(function(el){
+      var k=el.getAttribute('data-work'); if(WORKS[k])el.style.backgroundImage='url("'+WORKS[k]+'")';
+    });
+  }
+  if(window.YT_THUMBS){
+    document.querySelectorAll('.ytembed[data-thumb]').forEach(function(el){
+      var t=YT_THUMBS[el.getAttribute('data-yt')];
+      if(t)el.style.backgroundImage='url("'+t+'")';
+    });
+  }
+})();
+
+// click-to-play: load the YouTube iframe only on click (keeps the page light)
+function playYT(el){
+  var id=el.getAttribute('data-yt');
+  if(!id||el.dataset.playing)return;
+  el.dataset.playing='1';
+  var f=document.createElement('iframe');
+  f.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1';
+  f.title='BEWIBE concept movie';
+  f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
+  f.allowFullscreen=true;
+  el.innerHTML='';
+  el.appendChild(f);
+}
+
+function scaleSlides(){
+  var vw=window.innerWidth,sw=1920;
+  var scale=Math.min(vw/sw,1);
+  var offsetX=(vw-sw*scale)/2;
+  document.querySelectorAll('.slide').forEach(function(s){
+    s.style.transform='translateX('+offsetX+'px) scale('+scale+')';
+    s.style.marginBottom=(-(1080*(1-scale))+40)+'px';
+  });
+}
+scaleSlides();
+window.addEventListener('resize',scaleSlides);
+
+async function downloadPDF(){
+  var btn=document.getElementById('dlBtn'),txt=document.getElementById('dlText');
+  btn.disabled=true;txt.textContent='生成中...';
+  try{
+    var jsPDF=window.jspdf.jsPDF;
+    var pdf=new jsPDF({orientation:'landscape',unit:'px',format:[1920,1080],hotfixes:['px_scaling'],compress:true});
+    var slides=document.querySelectorAll('.slide');
+    for(var i=0;i<slides.length;i++){
+      var s=slides[i],origT=s.style.transform,origM=s.style.marginBottom;
+      s.style.transform='none';s.style.marginBottom='0';
+      var canvas=await html2canvas(s,{width:1920,height:1080,scale:1.5,useCORS:true,allowTaint:false,logging:false,backgroundColor:getComputedStyle(s).backgroundColor,imageTimeout:15000});
+      var img=canvas.toDataURL('image/jpeg',0.82);
+      if(i>0)pdf.addPage();
+      pdf.addImage(img,'JPEG',0,0,1920,1080,undefined,'FAST');
+      s.style.transform=origT;s.style.marginBottom=origM;
+      canvas.width=canvas.height=0;canvas=null;
+      txt.textContent='生成中... ('+(i+1)+'/'+slides.length+')';
+      await new Promise(function(r){requestAnimationFrame(function(){setTimeout(r,0)})});
+    }
+    pdf.save('BEWIBE_動画制作AI_サービス資料.pdf');
+  }catch(e){
+    console.error(e);
+    var msg=(e&&e.message?e.message:''+e);
+    if(/insecure|tainted|cross-origin|SecurityError/i.test(msg)){
+      alert('SafariではPDFを書き出せない場合があります。\nGoogle Chrome で開いて「PDFをダウンロード」を押してください。');
+    }else{alert('PDF生成エラー: '+msg);}
+  }
+  btn.disabled=false;txt.textContent='PDFをダウンロード';
+}
+</script>
+</body>
+</html>
