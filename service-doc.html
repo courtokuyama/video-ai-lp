@@ -176,6 +176,10 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--ink);line-height:1.7;-web
 .ytembed .ytplay::after{content:"";border-style:solid;border-width:22px 0 22px 36px;border-color:transparent transparent transparent #fff;margin-left:8px}
 .ytembed:hover .ytplay{background:#ff3b3b;transform:translate(-50%,-50%) scale(1.08)}
 .ytembed .ytcap{position:absolute;left:0;right:0;bottom:0;padding:18px 22px;background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff;font-size:16px;font-weight:800;letter-spacing:.02em}
+/* vertical short embed — smaller play button */
+.frame.vert.ytembed{border-style:solid;border-width:3px}
+.ytembed.vert .ytplay{width:64px;height:64px}
+.ytembed.vert .ytplay::after{border-width:14px 0 14px 23px;margin-left:5px}
 .spec{padding:70px 78px;display:flex;flex-direction:column;justify-content:center;background:var(--mint)}
 .spec .snum{font-size:22px;font-weight:900;color:var(--green-deep);font-family:'Archivo'}
 .spec h3{font-size:54px;font-weight:900;line-height:1.12;margin:4px 0 18px}
@@ -379,10 +383,10 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--ink);line-height:1.7;-web
 <div class="slide bg-mint">
   <div class="detail">
     <div class="shotzone">
-      <div class="zlabel">▶ 制作物スクショ（差し替え）</div>
-      <div class="frame vert"><span class="fi">▶</span><span class="ft">縦型ショート<br>9:16</span></div>
-      <div class="frame vert"><span class="fi">▶</span><span class="ft">縦型ショート<br>9:16</span></div>
-      <div class="frame vert"><span class="fi">▶</span><span class="ft">縦型ショート<br>9:16</span></div>
+      <div class="zlabel">▶ 制作実績（クリックで再生）</div>
+      <div class="frame vert ytembed" data-yt="gyWmLJZHVGw" data-thumb onclick="playYT(this)"><span class="ytplay"></span></div>
+      <div class="frame vert ytembed" data-yt="zFqUM92D9rs" data-thumb onclick="playYT(this)"><span class="ytplay"></span></div>
+      <div class="frame vert ytembed" data-yt="r4fLdylXzto" data-thumb onclick="playYT(this)"><span class="ytplay"></span></div>
     </div>
     <div class="spec">
       <div class="snum">MENU 01</div>
@@ -396,6 +400,7 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--ink);line-height:1.7;-web
         <span class="tchip"><img data-logo="pr" alt=""><span>Premiere</span></span>
         <span class="tchip"><img data-logo="openai" alt=""><span>Sora</span></span>
         <span class="tchip"><span class="wm">Runway</span></span>
+        <span class="tchip"><span class="wm">Kling</span></span>
       </div></div>
       <p class="specnote">AI生成を中心に、トレンドの縦型ショートを安く・大量に。同一企画の<b>A/Bバリエーション量産</b>にも最適です。</p>
     </div>
